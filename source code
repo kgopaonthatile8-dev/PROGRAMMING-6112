@@ -1,0 +1,80 @@
+// IConsoles interface - PROG6112 Q2
+public interface IConsoles {
+    String getConsoleType();
+    String getStore();
+    int getTotalSales();
+}
+
+// abstract Consoles class - stores console type, store name, total sales
+public abstract class Consoles implements IConsoles {
+    private String consoleType;
+    private String storeName;
+    private int totalSales;
+
+    // constructor that accepts all 3 as params
+    public Consoles(String consoleType, String storeName, int totalSales){
+        this.consoleType = consoleType;
+        this.storeName = storeName;
+        this.totalSales = totalSales;
+    }
+
+    // methods to get values
+    @Override
+    public String getConsoleType(){
+        return consoleType;
+    }
+
+    @Override
+    public String getStore(){
+        return storeName;
+    }
+
+    @Override
+    public int getTotalSales(){
+        return totalSales;
+    }
+}
+
+// subclass that extends Consoles
+public class ConsoleSales extends Consoles {
+
+    // constructor - pass to parent
+    public ConsoleSales(String consoleType, String storeName, int totalSales){
+        super(consoleType, storeName, totalSales);
+    }
+
+    // printReport method - prints the report for the store
+    public void printReport(){
+        System.out.println("CONSOLE SALES REPORT");
+        System.out.println("***********************");
+        System.out.println("CONSOLE TYPE: " + getConsoleType());
+        System.out.println("STORE: " + getStore());
+        System.out.println("TOTAL SALES: " + getTotalSales());
+        System.out.println("***********************");
+    }
+}
+
+import java.util.Scanner;
+
+public class RunApplication {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter the console type (PS5 / XBOX / SWITCH): ");
+        String type = sc.nextLine();
+
+        System.out.print("Enter the store name: ");
+        String store = sc.nextLine();
+
+        System.out.print("Enter the total sales for " + store + ": ");
+        int sales = sc.nextInt();
+
+        // create object of ConsoleSales
+        ConsoleSales sale = new ConsoleSales(type, store, sales);
+        
+        // print the report
+        sale.printReport();
+
+        sc.close();
+    }
+}
